@@ -1,42 +1,36 @@
-// ??? BMI = mass / height ** 2 = mass / (height * height)
-// https://www.czc.cz/geek/vypocet-bmi-co-je-to-body-mass-index-a-jak-jej-spocitat/clanek
-// BMI = mass / height ** 2;
+const minimumScore = 100;
 
-// TODO: Zeptat se na vzorec, neni jasny to = mass /.....
-
-// Calculated BMI based on the mass and height of the person.
-function calculateBMI(mass, height) {
-  return mass / Math.pow(height, 2);
+// Calculate average score.
+function calculateAverageScore(scores) {
+  const total = scores.reduce((acc, currentValue) => acc + currentValue, 0);
+  return total / scores.length;
 }
 
-const mark = {
-  mass: 78,
-  height: 1.69,
-};
+// Average scores.
+const dolphinsAverageScore = calculateAverageScore([96, 108, 89]);
+const koalasAverageScore = calculateAverageScore([88, 91, 110]);
 
-const john = {
-  mass: 92,
-  height: 1.95,
-};
+// Compare scores.
+const isDraw = dolphinsAverageScore === koalasAverageScore;
+const hasReachedMinimum =
+  dolphinsAverageScore >= minimumScore && koalasAverageScore >= minimumScore;
+const areDolphinsWinners = dolphinsAverageScore > koalasAverageScore;
+const areKoalasWinners = dolphinsAverageScore < koalasAverageScore;
 
-// Calculate BMI.
-const markBMI = calculateBMI(mark.mass, mark.height);
-const johnBMI = calculateBMI(john.mass, john.height);
-
-// Compare BMI.
-const markHigherBMI = markBMI > johnBMI;
-
-// Check who has higher BMI.
-if (markHigherBMI) {
+if (!hasReachedMinimum) {
+  console.log(`No one has reached the required minimum score ${minimumScore}.`);
   console.log(
-    `Mark's (${markBMI.toFixed(2)}) is higher than John's (${johnBMI.toFixed(
+    `Dolphins reached average score of ${dolphinsAverageScore.toFixed(
       2
-    )})!`
+    )} and Koalas ${koalasAverageScore.toFixed(2)}`
   );
 } else {
-  console.log(
-    `John's (${johnBMI.toFixed(2)}) is higher than Mark's (${markBMI.toFixed(
-      2
-    )})!`
-  );
+  // Check if dolphins are winners.
+  if (areDolphinsWinners) {
+    console.log("Dolphins wins a trophy!");
+  } else if (areKoalasWinners) {
+    console.log("Koalas wins a trophy!");
+  } else {
+    console.log("Ooops.. there is a draw!");
+  }
 }
