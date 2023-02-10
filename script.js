@@ -1,13 +1,25 @@
-// Calculate tip based on the bill.
-function calculateTip(bill) {
-  const range = bill >= 50 && bill <= 300;
-  return range ? bill * (20 / 100) : bill * (15 / 100);
-}
+// Calculate average based on the incoming value.
+const calcAverage = (value) => {
+  const total = value.reduce((acc, currentValue) => acc + currentValue, 0);
+  return total / value.length;
+};
 
-const bill = 40;
-const tip = calculateTip(bill);
-const totalValue = bill + tip;
+// Check which team wins.
+const checkWinner = (avgDolphins, avgKoalas) => {
+  if (avgDolphins > avgKoalas * 2) {
+    console.log(
+      `Dolphins win (${avgDolphins.toFixed(2)} vs. ${avgKoalas.toFixed(2)})`
+    );
+  } else if (avgKoalas > avgDolphins * 2) {
+    console.log(
+      `Koalas win (${avgKoalas.toFixed(2)} vs. ${avgDolphins.toFixed(2)})`
+    );
+  } else {
+    console.log("Nobody won.");
+  }
+};
 
-console.log(
-  `The bill was ${bill}, the tip was ${tip}, and the total value is ${totalValue}.`
-);
+const dolphinsAverage = calcAverage([6, 12, 41]);
+const koalasAverage = calcAverage([23, 34, 97]);
+
+checkWinner(dolphinsAverage, koalasAverage);
