@@ -1,34 +1,20 @@
-const mark = {
-  name: "Mark Miller",
-  mass: 78,
-  height: 1.69,
-  calcBMI() {
-    this.bmi = this.mass / this.height ** 2;
-  },
-};
+const bills = [22, 295, 176, 440, 37, 105, 10, 1100, 86, 52];
+const tips = [];
+const totals = [];
 
-const john = {
-  name: "John Smith",
-  mass: 92,
-  height: 1.95,
-  calcBMI() {
-    this.bmi = this.mass / this.height ** 2;
-  },
-};
-
-mark.calcBMI();
-john.calcBMI();
-
-if (mark.bmi > john.bmi) {
-  console.log(
-    `Mark's BMI (${mark.bmi.toFixed(
-      2
-    )}) is higher than John's (${john.bmi.toFixed(2)})!"`
-  );
-} else {
-  console.log(
-    `John's BMI (${john.bmi.toFixed(
-      2
-    )}) is higher than Mark's (${mark.bmi.toFixed(2)})!"`
-  );
+function calcTip(bill) {
+  const range = bill >= 50 && bill <= 300;
+  return range ? bill * (20 / 100) : bill * (15 / 100);
 }
+
+function calcAverage(arr) {
+  return arr.reduce((acc, currentValue) => acc + currentValue, 0) / arr.length;
+}
+
+for (let i = 0; i < bills.length; i++) {
+  tips.push(calcTip(bills[i]));
+  totals.push(bills[i] + tips[i]);
+}
+
+// calcAverage(totals);
+console.log("Average of totals: ", calcAverage(totals));
