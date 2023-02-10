@@ -6,7 +6,7 @@
 
 // Calculated BMI based on the mass and height of the person.
 function calculateBMI(mass, height) {
-  return mass / height ** 2;
+  return mass / Math.pow(height, 2);
 }
 
 const mark = {
@@ -26,5 +26,17 @@ const johnBMI = calculateBMI(john.mass, john.height);
 // Compare BMI.
 const markHigherBMI = markBMI > johnBMI;
 
-// Check if Mark has higher BMI.
-markHigherBMI && console.log("Mark has higher BMI, YAY!");
+// Check who has higher BMI.
+if (markHigherBMI) {
+  console.log(
+    `Mark's (${markBMI.toFixed(2)}) is higher than John's (${johnBMI.toFixed(
+      2
+    )})!`
+  );
+} else {
+  console.log(
+    `John's (${johnBMI.toFixed(2)}) is higher than Mark's (${markBMI.toFixed(
+      2
+    )})!`
+  );
+}
